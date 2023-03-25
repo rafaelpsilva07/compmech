@@ -312,7 +312,7 @@ def fkCBFycte22(double kt, double kr, object p1, object p2,
     '''
     cdef int i2, k2, j2, l2, c, row, col
     cdef int m2, n2
-    cdef double a1, a2, b1, b2
+    cdef double a2, b2
     cdef double u1tx2, u1rx2, u2tx2, u2rx2
     cdef double v1tx2, v1rx2, v2tx2, v2rx2
     cdef double w1tx2, w1rx2, w2tx2, w2rx2
@@ -326,10 +326,8 @@ def fkCBFycte22(double kt, double kr, object p1, object p2,
     cdef double etacte2
     cdef double f2Auf2Bu, f2Avf2Bv, f2Awf2Bw
     cdef double g2Au, g2Bu, g2Av, g2Bv, g2Aw, g2Bw, g2Awxi, g2Bwxi
-    a1 = p1.a
     a2 = p2.a
-#    b1 = p1.b
-#    b2 = p2.b
+    b2 = p2.b
     m2 = p2.m
     n2 = p2.n
     u1tx2 = p2.u1tx ; u1rx2 = p2.u1rx ; u2tx2 = p2.u2tx ; u2rx2 = p2.u2rx
@@ -388,5 +386,5 @@ def fkCBFycte22(double kt, double kr, object p1, object p2,
                         kCBFycte22v[c] += 0.5*a2 * kt*(f2Awf2Bw*g2Aw*g2Bw + 4*f2Awf2Bw*g2Awxi*g2Bwxi*kr/((b2*b2)*kt))
 
     kCBFycte22 = coo_matrix((kCBFycte22v, (kCBFycte22r, kCBFycte22c)), shape=(size, size))
-
+    
     return kCBFycte22
