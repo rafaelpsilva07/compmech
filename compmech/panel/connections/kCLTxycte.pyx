@@ -258,19 +258,20 @@ def fkCBFxycte12(double kt, double kr, object p1, object p2,
                         c += 1
                         kCBFxycte12r[c] = row+0
                         kCBFxycte12c[c] = col+0
-                        kCBFxycte12v[c] += -0.25*b1*a2 * g1Auf2Bw*f1Au*g2Bw*kt
+                        # kCBFxycte12v[c] += -0.25*b1*a2 * g1Auf2Bw*f1Au*g2Bw*kt
+                        kCBFxycte12v[c] += -0.5*((b1+a2)/2) * g1Auf2Bw*f1Au*g2Bw*kt
                         c += 1
                         kCBFxycte12r[c] = row+1
                         kCBFxycte12c[c] = col+2
-                        kCBFxycte12v[c] += -0.25*b1*a2 * g1Avf2Bu*f1Av*g2Bu*kt
+                        kCBFxycte12v[c] += -0.5*((b1+a2)/2) * g1Avf2Bu*f1Av*g2Bu*kt
                         c += 1
                         kCBFxycte12r[c] = row+2
                         kCBFxycte12c[c] = col+1
-                        kCBFxycte12v[c] += 0.25*b1*a2 * g1Awf2Bv*f1Aw*g2Bv*kt
+                        kCBFxycte12v[c] += 0.5*((b1+a2)/2) * g1Awf2Bv*f1Aw*g2Bv*kt
                         c += 1
                         kCBFxycte12r[c] = row+2
                         kCBFxycte12c[c] = col+2
-                        kCBFxycte12v[c] += -1*b1*a2 * g1Awf2Bw*f1Awxi*g2Bwxi*kr/(a1*b2)
+                        kCBFxycte12v[c] += -2*((b1+a2)/2) * g1Awf2Bw*f1Awxi*g2Bwxi*kr/(a1*b2)
 
     kCBFxycte12 = coo_matrix((kCBFxycte12v, (kCBFxycte12r, kCBFxycte12c)), shape=(size, size))
 
