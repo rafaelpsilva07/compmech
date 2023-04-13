@@ -194,7 +194,8 @@ def fkCBFxycte12(double kt, double kr, object p1, object p2,
 
     cdef double xicte1, etacte2
     cdef double g1Auf2Bw, g1Avf2Bu, g1Awf2Bv, g1Awf2Bw, f2Bwg1Au, f2Bug1Av, f2Bvg1Aw, f2Bwg1Aw
-    cdef double f1Aui, f1Avi, f1Awi, f1Awxii, g2Bul, g2Bvl, g2Bwl, g2Bwxil, g2Buj, g2Bvj, g2Bwj, g2Bwxij, f1Auk, f1Avk, f1Awk, f1Awxik
+    cdef double f1Aui, f1Avi, f1Awi, f1Awxii, g2Bul, g2Bvl, g2Bwl, g2Bwxil
+    cdef double g2Buj, g2Bvj, g2Bwj, g2Bwxij, f1Auk, f1Avk, f1Awk, f1Awxik
 
     a1 = p1.a
     a2 = p2.a
@@ -236,10 +237,10 @@ def fkCBFxycte12(double kt, double kr, object p1, object p2,
                 g1Awf2Bv = integral_ff(j1, k2, w1ty1, w1ry1, w2ty1, w2ry1, v1tx2, v1rx2, v2tx2, v2rx2)
                 g1Awf2Bw = integral_ff(j1, k2, w1ty1, w1ry1, w2ty1, w2ry1, w1tx2, w1rx2, w2tx2, w2rx2)
                 
-                g2Buj = calc_f(j2, etacte2, u1ty2, u1ry2, u2ty2, u2ry2)
-                g2Bvj = calc_f(j2, etacte2, v1ty2, v1ry2, v2ty2, v2ry2)
-                g2Bwj = calc_f(j2, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
-                g2Bwxij = calc_fxi(j2, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
+                g2Buj = calc_f(j1, etacte2, u1ty2, u1ry2, u2ty2, u2ry2)
+                g2Bvj = calc_f(j1, etacte2, v1ty2, v1ry2, v2ty2, v2ry2)
+                g2Bwj = calc_f(j1, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
+                g2Bwxij = calc_fxi(j1, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
 
                 f1Auk = calc_f(k2, xicte1, u1tx1, u1rx1, u2tx1, u2rx1)
                 f1Avk = calc_f(k2, xicte1, v1tx1, v1rx1, v2tx1, v2rx1)
