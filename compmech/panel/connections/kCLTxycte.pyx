@@ -193,8 +193,8 @@ def fkCBFxycte12(double kt, double kr, object p1, object p2,
     cdef np.ndarray[cDOUBLE, ndim=1] kCBFxycte12v
 
     cdef double xicte1, etacte2
-    cdef double g1Auf2Bw, g1Avf2Bu, g1Awf2Bv, g1Awf2Bw
-    cdef double f1Au, f1Av, f1Aw, f1Awxi, g2Bu, g2Bv, g2Bw, g2Bwxi
+    cdef double g1Auf2Bw, g1Avf2Bu, g1Awf2Bv, g1Awf2Bw, f2Bwg1Au, f2Bug1Av, f2Bvg1Aw, f2Bwg1Aw
+    cdef double f1Aui, f1Avi, f1Awi, f1Awxii, g2Bul, g2Bvl, g2Bwl, g2Bwxil, g2Buj, g2Bvj, g2Bwj, g2Bwxij, f1Auk, f1Avk, f1Awk, f1Awxik
 
     a1 = p1.a
     a2 = p2.a
@@ -235,12 +235,22 @@ def fkCBFxycte12(double kt, double kr, object p1, object p2,
                 g1Avf2Bu = integral_ff(j1, k2, v1ty1, v1ry1, v2ty1, v2ry1, u1tx2, u1rx2, u2tx2, u2rx2)
                 g1Awf2Bv = integral_ff(j1, k2, w1ty1, w1ry1, w2ty1, w2ry1, v1tx2, v1rx2, v2tx2, v2rx2)
                 g1Awf2Bw = integral_ff(j1, k2, w1ty1, w1ry1, w2ty1, w2ry1, w1tx2, w1rx2, w2tx2, w2rx2)
+                
+                g2Buj = calc_f(j2, etacte2, u1ty2, u1ry2, u2ty2, u2ry2)
+                g2Bvj = calc_f(j2, etacte2, v1ty2, v1ry2, v2ty2, v2ry2)
+                g2Bwj = calc_f(j2, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
+                g2Bwxij = calc_fxi(j2, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
+
+                f1Auk = calc_f(k2, xicte1, u1tx1, u1rx1, u2tx1, u2rx1)
+                f1Avk = calc_f(k2, xicte1, v1tx1, v1rx1, v2tx1, v2rx1)
+                f1Awk = calc_f(k2, xicte1, w1tx1, w1rx1, w2tx1, w2rx1)
+                f1Awxik = calc_fxi(k2, xicte1, w1tx1, w1rx1, w2tx1, w2rx1)
 
                 for i1 in range(m1):
-                    f1Au = calc_f(i1, xicte1, u1tx1, u1rx1, u2tx1, u2rx1)
-                    f1Av = calc_f(i1, xicte1, v1tx1, v1rx1, v2tx1, v2rx1)
-                    f1Aw = calc_f(i1, xicte1, w1tx1, w1rx1, w2tx1, w2rx1)
-                    f1Awxi = calc_fxi(i1, xicte1, w1tx1, w1rx1, w2tx1, w2rx1)
+                    f1Aui = calc_f(i1, xicte1, u1tx1, u1rx1, u2tx1, u2rx1)
+                    f1Avi = calc_f(i1, xicte1, v1tx1, v1rx1, v2tx1, v2rx1)
+                    f1Awi = calc_f(i1, xicte1, w1tx1, w1rx1, w2tx1, w2rx1)
+                    f1Awxii = calc_fxi(i1, xicte1, w1tx1, w1rx1, w2tx1, w2rx1)
 
                     for l2 in range(n2):
                         row = row0 + num*(j1*m1 + i1)
@@ -250,28 +260,32 @@ def fkCBFxycte12(double kt, double kr, object p1, object p2,
                         #if row > col:
                             #continue
 
-                        g2Bu = calc_f(l2, etacte2, u1ty2, u1ry2, u2ty2, u2ry2)
-                        g2Bv = calc_f(l2, etacte2, v1ty2, v1ry2, v2ty2, v2ry2)
-                        g2Bw = calc_f(l2, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
-                        g2Bwxi = calc_fxi(l2, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
+                        g2Bul = calc_f(l2, etacte2, u1ty2, u1ry2, u2ty2, u2ry2)
+                        g2Bvl = calc_f(l2, etacte2, v1ty2, v1ry2, v2ty2, v2ry2)
+                        g2Bwl = calc_f(l2, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
+                        g2Bwxil = calc_fxi(l2, etacte2, w1ty2, w1ry2, w2ty2, w2ry2)
+
+                        f2Bwg1Au = integral_ff(l2, i1, w1tx2, w1rx2, w2tx2, w2rx2, u1ty1, u1ry1, u2ty1, u2ry1)
+                        f2Bug1Av = integral_ff(l2, i1, u1tx2, u1rx2, u2tx2, u2rx2, v1ty1, v1ry1, v2ty1, v2ry1)
+                        f2Bvg1Aw = integral_ff(l2, i1, v1tx2, v1rx2, v2tx2, v2rx2, w1ty1, w1ry1, w2ty1, w2ry1)
+                        f2Bwg1Aw = integral_ff(l2, i1, w1tx2, w1rx2, w2tx2, w2rx2, w1ty1, w1ry1, w2ty1, w2ry1)
 
                         c += 1
                         kCBFxycte12r[c] = row+0
                         kCBFxycte12c[c] = col+0
-                        # kCBFxycte12v[c] += -0.25*b1*a2 * g1Auf2Bw*f1Au*g2Bw*kt
-                        kCBFxycte12v[c] += -0.5*((b1+a2)/2) * g1Auf2Bw*f1Au*g2Bw*kt
+                        kCBFxycte12v[c] += -0.5*b1*kt * (f1Aui*g2Bwl*g1Auf2Bw + g2Bwj*f1Auk*f2Bwg1Au)
                         c += 1
                         kCBFxycte12r[c] = row+1
                         kCBFxycte12c[c] = col+2
-                        kCBFxycte12v[c] += -0.5*((b1+a2)/2) * g1Avf2Bu*f1Av*g2Bu*kt
+                        kCBFxycte12v[c] += -0.5*b1*kt * (f1Avi*g2Bul*g1Avf2Bu + g2Buj*f1Avk*f2Bug1Av)
                         c += 1
                         kCBFxycte12r[c] = row+2
                         kCBFxycte12c[c] = col+1
-                        kCBFxycte12v[c] += 0.5*((b1+a2)/2) * g1Awf2Bv*f1Aw*g2Bv*kt
+                        kCBFxycte12v[c] += -0.5*b1*kt * (f1Awi*g2Bvl*g1Awf2Bv + g2Bvj*f1Awk*f2Bvg1Aw)
                         c += 1
                         kCBFxycte12r[c] = row+2
                         kCBFxycte12c[c] = col+2
-                        kCBFxycte12v[c] += -2*((b1+a2)/2) * g1Awf2Bw*f1Awxi*g2Bwxi*kr/(a1*b2)
+                        kCBFxycte12v[c] += -0.5*b1*(8*kr/(a1*b2)) * (f1Awxii*g2Bwxil*g1Awf2Bw + g2Bwxij*f1Awxik*f2Bwg1Aw))
 
     kCBFxycte12 = coo_matrix((kCBFxycte12v, (kCBFxycte12r, kCBFxycte12c)), shape=(size, size))
 
