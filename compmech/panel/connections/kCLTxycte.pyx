@@ -403,3 +403,4 @@ def fkCBFycte22(double kt, double kr, object p1, object p2,
     kCBFycte22 = coo_matrix((kCBFycte22v, (kCBFycte22r, kCBFycte22c)), shape=(size, size))
     
     return kCBFycte22
+#
