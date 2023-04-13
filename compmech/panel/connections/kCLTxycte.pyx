@@ -285,7 +285,7 @@ def fkCBFxycte12(double kt, double kr, object p1, object p2,
                         c += 1
                         kCBFxycte12r[c] = row+2
                         kCBFxycte12c[c] = col+2
-                        kCBFxycte12v[c] += -0.5*b1*(8*kr/(a1*b2)) * (f1Awxii*g2Bwxil*g1Awf2Bw + g2Bwxij*f1Awxik*f2Bwg1Aw))
+                        kCBFxycte12v[c] += -0.5*b1*(8*kr/(a1*b2)) * (f1Awxii*g2Bwxil*g1Awf2Bw + g2Bwxij*f1Awxik*f2Bwg1Aw)
 
     kCBFxycte12 = coo_matrix((kCBFxycte12v, (kCBFxycte12r, kCBFxycte12c)), shape=(size, size))
 
@@ -403,4 +403,3 @@ def fkCBFycte22(double kt, double kr, object p1, object p2,
     kCBFycte22 = coo_matrix((kCBFycte22v, (kCBFycte22r, kCBFycte22c)), shape=(size, size))
     
     return kCBFycte22
-#
